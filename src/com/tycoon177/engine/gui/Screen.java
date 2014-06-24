@@ -12,15 +12,15 @@ import javax.swing.Timer;
 import com.tycoon177.engine.Game;
 
 public abstract class Screen extends JPanel {
-	//private int maxFPS = 60;
-	//private double optimalTime = 1000000000 / maxFPS;
+	// private int maxFPS = 60;
+	// private double optimalTime = 1000000000 / maxFPS;
 	private Thread gameThread;
 	private Game game;
 	private boolean isRunning;
 	protected boolean paused;
 	private Timer fpsTimer, tickTimer;
 	private Graphics2D g;
-	//private long lastTime, updateTime;
+	// private long lastTime, updateTime;
 	
 	/**
 	 * 
@@ -37,10 +37,10 @@ public abstract class Screen extends JPanel {
 		setSize(game.getDimensions());
 		this.game = game;
 		onCreate();
-		//gameThread = new Thread(this, this.getClass().getName());
+		// gameThread = new Thread(this, this.getClass().getName());
 		setFocusable(true);
 		setupTimer(60);
-		//setupUpdateTimer(120);
+		// setupUpdateTimer(120);
 		this.isRunning = true;
 		this.setTickTime(100);
 		this.setDoubleBuffered(true);
@@ -71,7 +71,8 @@ public abstract class Screen extends JPanel {
 	
 	/**
 	 * This method is called as often as possible. Do not render in here. All updates involving movement or time should be multiplied by updateTime before being used so that it runs fairly well on all computers.
-	 * @param d 
+	 * 
+	 * @param d
 	 * 
 	 * @param updateTime
 	 */
@@ -79,28 +80,21 @@ public abstract class Screen extends JPanel {
 	
 	@Override
 	public void paintComponent(Graphics graphics) {
-		super.paintComponent(graphics);;
+		super.paintComponent(graphics);
+		;
 		g = (Graphics2D) graphics;
-			
-		//super.paintComponent(graphics);
+		
+		// super.paintComponent(graphics);
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_VRGB);
+		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+				RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_VRGB);
 		onDraw(g);
-		if(paused) drawOnPause(g);
+		if (paused) drawOnPause(g);
 	}
 	
-	/*@Override
-	public void run() {
-		long lastTime = System.nanoTime();
-		long updateTime;
-		//System.out.println("Here");
-		while (isRunning) {
-			if (!paused) {
-				updateTime = System.nanoTime() - lastTime;
-				onTick((double) updateTime / this.optimalTime);
-			}
-		}
-	}*/
+	/*
+	 * @Override public void run() { long lastTime = System.nanoTime(); long updateTime; //System.out.println("Here"); while (isRunning) { if (!paused) { updateTime = System.nanoTime() - lastTime; onTick((double) updateTime / this.optimalTime); } } }
+	 */
 	
 	public void setPaused(boolean active) {
 		paused = active;
@@ -131,25 +125,25 @@ public abstract class Screen extends JPanel {
 	/**
 	 * Will be drawn over the game, while the game is still rendered
 	 */
-	public void drawOnPause(Graphics g){}
+	public void drawOnPause(Graphics g) {
+	}
 	
-	public void setTickTime(int ups){
-		if(this.tickTimer != null && this.tickTimer.isRunning()) this.tickTimer.stop();
-		this.tickTimer = new Timer(1000/ups, new ActionListener(){
+	public void setTickTime(int ups) {
+		if (this.tickTimer != null && this.tickTimer.isRunning()) this.tickTimer.stop();
+		this.tickTimer = new Timer(1000 / ups, new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e){
-				if(isRunning)
-				onTick(1);
+			public void actionPerformed(ActionEvent e) {
+				if (isRunning) onTick(1);
 			}
 		});
 		this.tickTimer.start();
 	}
 	
-	public boolean isPaused(){
+	public boolean isPaused() {
 		return paused;
 	}
 	
-	public void startTicking(){
+	public void startTicking() {
 	}
 	
 }

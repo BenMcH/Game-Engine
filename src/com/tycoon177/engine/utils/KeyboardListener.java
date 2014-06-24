@@ -27,4 +27,8 @@ public class KeyboardListener implements KeyListener {
 		return keys.get(keyEventKeyCode);
 	}
 	
+	public void setKeyPressed(int keyCode, boolean state){
+		keys.put(keyCode, state);
+	}
+	
 }

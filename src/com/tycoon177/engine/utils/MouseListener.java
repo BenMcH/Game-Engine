@@ -3,12 +3,15 @@ package com.tycoon177.engine.utils;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
-public class MouseListener implements java.awt.event.MouseListener, MouseMotionListener {
+public class MouseListener implements java.awt.event.MouseListener, MouseMotionListener, MouseWheelListener {
 	private boolean clicked = false;
 	public Point location;
 	public static final int RIGHT = 1, LEFT = 0;
 	private int mouseBtn = -1;
+	private int rotation;
 	public MouseListener(){
 		location = new Point();
 	}
@@ -57,5 +60,20 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
 	
 	public int getMouseBtn(){
 		return mouseBtn;
+	}
+	
+	public void setMouseClicked(boolean state){
+		this.clicked = state;
+	}
+
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		rotation = e.getWheelRotation();
+	}
+	
+	public int getRotation(){
+		int a = rotation;
+		rotation = 0;
+		return a;
 	}
 }
