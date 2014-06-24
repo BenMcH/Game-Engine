@@ -146,4 +146,10 @@ public abstract class Screen extends JPanel {
 	public void startTicking() {
 	}
 	
+	public void stopTime(){
+		if(fpsTimer.isRunning())fpsTimer.stop();
+		if(tickTimer.isRunning()) tickTimer.stop();
+		
+	}
+	
 }
